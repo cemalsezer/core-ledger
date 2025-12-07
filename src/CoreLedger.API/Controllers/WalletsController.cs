@@ -8,20 +8,20 @@ using Microsoft.AspNetCore.Mvc;
 namespace CoreLedger.API.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")] // Versiyonlama eklendi (Profesyonel yaklaşım)
+    [Route("api/v1/[controller]")] 
     public class WalletsController : ControllerBase
     {
         private readonly ITransferService _transferService;
         private readonly IWalletRepository _walletRepository;
 
-        // Servisleri Constructor Injection ile alıyoruz.
+       
         public WalletsController(ITransferService transferService, IWalletRepository walletRepository)
         {
             _transferService = transferService;
             _walletRepository = walletRepository;
         }
 
-        // POST /api/v1/wallets/initialize (Test için basit cüzdan oluşturucu)
+        
         [HttpPost("initialize")]
         public async Task<IActionResult> InitializeWallet([FromQuery] string userId, [FromQuery] decimal initialBalance = 1000)
         {
@@ -34,11 +34,7 @@ namespace CoreLedger.API.Controllers
                 CreatedAt = DateTime.UtcNow
             };
             
-            // await _walletRepository.AddAsync(newWallet); 
-            // await _walletRepository.SaveChangesAsync();
-
-            // Pratik olması için şimdilik basit SaveChanges ile ilerliyoruz:
-            // Assuming the repo has been updated to have AddAsync.
+            
             await _walletRepository.AddAsync(newWallet);
             await _walletRepository.SaveChangesAsync(); 
             
@@ -70,11 +66,11 @@ namespace CoreLedger.API.Controllers
             }
             catch (InsufficientBalanceException ex)
             {
-                return BadRequest(ex.Message); // Custom Exception'dan gelen mesajı döndür.
+                return BadRequest(ex.Message); 
             }
             catch (Exception ex)
             {
-                // Tüm diğer hatalar için 500 dönülmeli
+               
                 return StatusCode(500, new { message = "Sunucu Hatası: " + ex.Message });
             }
         }

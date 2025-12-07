@@ -13,7 +13,7 @@ namespace CoreLedger.Infrastructure.Repositories
     {
         private readonly AppDbContext _context;
 
-        // Dependency Injection ile DbContext'i alıyoruz
+       
         public WalletRepository(AppDbContext context)
         {
             _context = context;
@@ -27,10 +27,8 @@ namespace CoreLedger.Infrastructure.Repositories
 
         public async Task UpdateAsync(Wallet wallet)
         {
-            // EF Core, değişikliği takip eder ama biz yine de açıkça belirtelim.
             _context.Wallets.Update(wallet);
 
-            // Not: SaveChanges'i burada çağırmıyoruz, Transaction yönetimi için serviste çağıracağız.
             await Task.CompletedTask;
         }
 
