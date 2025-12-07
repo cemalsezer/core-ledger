@@ -15,6 +15,17 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IWalletRepository, WalletRepository>();
 builder.Services.AddScoped<ITransferService, TransferService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        builder => builder
+            .WithOrigins("http://localhost:5173", "http://localhost:5174") // Allow both just in case
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+            );
+});
+
 // Add services to the container.
 // Add services to the container.
 builder.Services.AddControllers();
@@ -29,6 +40,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("AllowFrontend");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

@@ -64,13 +64,17 @@ namespace CoreLedger.API.Controllers
                 await _transferService.TransferFundsAsync(request);
                 return Ok(new { message = "Transfer başarılı", senderId = request.SenderWalletId, receiverId = request.ReceiverWalletId });
             }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
             catch (InsufficientBalanceException ex)
             {
                 return BadRequest(ex.Message); 
             }
             catch (Exception ex)
             {
-               
+                Console.WriteLine($"Error during transfer: {ex}"); // Log to console
                 return StatusCode(500, new { message = "Sunucu Hatası: " + ex.Message });
             }
         }
