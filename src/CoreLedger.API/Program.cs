@@ -33,11 +33,12 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+// Configure the HTTP request pipeline.
+// if (app.Environment.IsDevelopment()) // Swagger'ı her ortamda açıyoruz
+// {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+// }
 app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
