@@ -25,20 +25,27 @@ namespace CoreLedger.API.Controllers
         [HttpPost("initialize")]
         public async Task<IActionResult> InitializeWallet([FromQuery] string userId, [FromQuery] decimal initialBalance = 1000)
         {
-            var newWallet = new Wallet 
-            { 
-                UserId = userId, 
-                Balance = initialBalance, 
-                Name = $"{userId}'s Wallet",
-                Currency = "TRY", // Default currency
-                CreatedAt = DateTime.UtcNow
-            };
+            try
+            {
+                var newWallet = new Wallet 
+                { 
+                    UserId = userId, 
+                    Balance = initialBalance, 
+                    Name = $"{userId}'s Wallet",
+                    Currency = "TRY", 
+                    CreatedAt = DateTime.UtcNow
+                };
             
-            
-            await _walletRepository.AddAsync(newWallet);
-            await _walletRepository.SaveChangesAsync(); 
-            
-            return CreatedAtAction(nameof(GetWallet), new { id = newWallet.Id }, newWallet);
+                await _walletRepository.AddAsync(newWallet);
+                await _walletRepository.SaveChangesAsync(); 
+                
+                return CreatedAtAction(nameof(GetWallet), new { id = newWallet.Id }, newWallet);
+            }
+            catch (Exception ex)
+            {
+                // Hatanın detayını dönüyoruz ki Swagger'da görebilelim
+                return StatusCode(500, new { message = "Wallet creation failed: " + ex.Message, detail = ex.ToString() });
+            }
         }
 
         // GET /api/v1/wallets/{id}
