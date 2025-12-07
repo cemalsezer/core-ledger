@@ -17,13 +17,11 @@ builder.Services.AddScoped<ITransferService, TransferService>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend",
+    options.AddPolicy("AllowAll",
         builder => builder
-            .WithOrigins("http://localhost:5173", "http://localhost:5174") // Allow both just in case
+            .AllowAnyOrigin() // Vercel'den gelen tüm URL'lere izin veriyoruz
             .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials()
-            );
+            .AllowAnyHeader());
 });
 
 // Add services to the container.
@@ -40,7 +38,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors("AllowFrontend");
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
