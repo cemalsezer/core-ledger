@@ -4,6 +4,14 @@
 
 ![Core Ledger Demo](https://placehold.co/1200x600/2563eb/ffffff?text=Core+Ledger+App)
 
+## 🌍 Live Demo (Deployment)
+
+The project is live and testable:
+
+*   **Backend (Swagger):** [https://core-ledger.onrender.com/swagger](https://core-ledger.onrender.com/swagger)
+*   **Frontend:** [https://core-ledger-iota.vercel.app/](https://core-ledger-iota.vercel.app/)
+
+
 ## ✨ Features
 
 *   **Wallet Management:** Users can create new wallets in seconds.
@@ -87,12 +95,6 @@ core-ledger/
 └── Dockerfile              # Backend Container Definition
 ```
 
-## 🌍 Live Demo (Deployment)
-
-The project is live and testable:
-
-*   **Backend (Swagger):** [https://core-ledger.onrender.com/swagger](https://core-ledger.onrender.com/swagger)
-*   **Frontend:** [https://core-ledger-iota.vercel.app/](https://core-ledger-iota.vercel.app/)
 
 ## 📝 License
 
