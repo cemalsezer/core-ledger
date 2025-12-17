@@ -92,7 +92,7 @@ core-ledger/
 The project is live and testable:
 
 *   **Backend (Swagger):** [https://core-ledger.onrender.com/swagger](https://core-ledger.onrender.com/swagger)
-*   **Frontend:** [Your Vercel Deployment Link]
+*   **Frontend:** [https://core-ledger-iota.vercel.app/](https://core-ledger-iota.vercel.app/)
 
 ## 📝 License
 
